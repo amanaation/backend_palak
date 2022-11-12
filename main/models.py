@@ -1,6 +1,6 @@
 from pydantic import BaseModel
-from typing import Union
-
+from typing import Optional, Union
+from fastapi import Form
 
 class User(BaseModel):
     name: str
@@ -8,4 +8,10 @@ class User(BaseModel):
     dob: str
     gender: str
     password: str
+
+class Questionaier(BaseModel):
+    que1: Optional[str] = Form()
+    # que2: Optional[str]
+    # que3: Optional[str]
+    # que4: Optional[str]
 

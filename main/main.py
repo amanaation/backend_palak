@@ -1,12 +1,15 @@
-from fastapi import FastAPI
+from actions import *
+
+from fastapi import FastAPI, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi import Request
 from fastapi.responses import HTMLResponse
-from pprint import pprint
+from models import User, Questionaier
 
-from models import User
-from actions import *
+from pprint import pprint
+from typing import Optional, Union
+
 import uvicorn
 
 app = FastAPI()
@@ -16,51 +19,71 @@ templates = Jinja2Templates(directory="static")
 
 @app.get("/")
 def serve_home(request: Request):
-    with open("static/Index.html") as file:
-        html_response = file.read()
+    return templates.TemplateResponse("Index.html", {"request": request, "id": id})
 
-    return HTMLResponse(content=html_response, status_code=200)
 
 
 @app.get("/login")
 def serve_home(request: Request):
-    with open("static/Login.html") as file:
-        html_response = file.read()
+    return templates.TemplateResponse("Login.html", {"request": request, "id": id})
 
-    return HTMLResponse(content=html_response, status_code=200)
 
 @app.get("/blog")
 def serve_home(request: Request):
-    with open("static/Blog.html") as file:
-        html_response = file.read()
-
-    return HTMLResponse(content=html_response, status_code=200)
+    return templates.TemplateResponse("Blog.html", {"request": request, "id": id})
 
 
 @app.get("/register")
 def serve_home(request: Request):
-    with open("static/Registration.html") as file:
-        html_response = file.read()
-
-    return HTMLResponse(content=html_response, status_code=200)
+    return templates.TemplateResponse("Registration.html", {"request": request, "id": id})
 
 @app.get("/asses")
 def serve_home(request: Request):
-    with open("static/assesment.html") as file:
-        html_response = file.read()
+    return templates.TemplateResponse("assesment.html", {"request": request, "id": id})
 
-    return HTMLResponse(content=html_response, status_code=200)
+@app.get("/result")
+def serve_home(request: Request):
+    return templates.TemplateResponse("result2.html", {"request": request, "id": id})
 
 
 @app.post("/result")
-def serve_home(request: Request):
-    pprint(request.__dict__)
-    return {"message": "Some message"}
+def serve_home( que1: Optional[str] = Form(), 
+                que2: Optional[str] = Form(), 
+                que3: Optional[str] = Form(), 
+                que4: Optional[str] = Form(), 
+                que5: Optional[str] = Form(), 
+                que6: Optional[str] = Form(), 
+                que7: Optional[str] = Form(), 
+                que8: Optional[str] = Form(), 
+                que9: Optional[str] = Form(), 
+                que10: Optional[str] = Form(), 
+                que11: Optional[str] = Form(), 
+                que12: Optional[str] = Form(), 
+                que13: Optional[str] = Form(),
+                que14: Optional[str] = Form(), 
+                que15: Optional[str] = Form(), 
+                que16: Optional[str] = Form(), 
+                que17: Optional[str] = Form(), 
+                que18: Optional[str] = Form(), 
+                que19: Optional[str] = Form(), 
+                que20: Optional[str] = Form(), 
+                que21: Optional[str] = Form(), 
+                que22: Optional[str] = Form(), 
+                que23: Optional[str] = Form(), 
+                que24: Optional[str] = Form(), 
+                que25: Optional[str] = Form(), 
+                que26: Optional[str] = Form(), 
+            ):                
 
-    # with open("static/assesment.html") as file:
-    #     html_response = file.read()
+    requests = [que1, que2, que3, que4, que5, que6, que7, que8, que9, que10, que11, que12, que13, 
+                que14, que15, que16, que17, que18, que19, que20, que21, que22, que23, que24, que25, que26]
 
-    # return HTMLResponse(content=html_response, status_code=200)
+    print(requests)
+
+    response = assess_results(requests)
+    return templates.TemplateResponse("result1.html", {"request": {}, "id": id, "response": response})
+    # return {"message": "Some message"}
+
 
 @app.post("/validate_registeration/")
 def register(item:User):
