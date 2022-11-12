@@ -29,6 +29,13 @@ def serve_home(request: Request):
 
     return HTMLResponse(content=html_response, status_code=200)
 
+@app.get("/blog")
+def serve_home(request: Request):
+    with open("static/Blog.html") as file:
+        html_response = file.read()
+
+    return HTMLResponse(content=html_response, status_code=200)
+
 
 @app.get("/register")
 def serve_home(request: Request):
