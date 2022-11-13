@@ -9,9 +9,3 @@ class User(BaseModel):
     gender: str
     password: str
 
-class Questionaier(BaseModel):
-    que1: Optional[str] = Form()
-    # que2: Optional[str]
-    # que3: Optional[str]
-    # que4: Optional[str]
-

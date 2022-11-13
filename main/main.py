@@ -4,8 +4,7 @@ from fastapi import FastAPI, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi import Request
-from fastapi.responses import HTMLResponse
-from models import User, Questionaier
+from models import User
 
 from pprint import pprint
 from typing import Optional, Union
